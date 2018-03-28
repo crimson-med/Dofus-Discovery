@@ -6,3 +6,15 @@ body {
 a {
   color: #00B7FF;
 }
+img{
+  width: 110px;
+  height: 70px;
+}
+table{
+  border: solid thin grey;
+}
+td{
+  width: 110px;
+  height: 70px;
+  background-color: pink;
+}
