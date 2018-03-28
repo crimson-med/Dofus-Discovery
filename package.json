@@ -1,0 +1,32 @@
+{
+  "name": "dofus-discovery",
+  "version": "1.0.0",
+  "description": "A tool to generate an overview of the Dofus world map and create a pathfinder algorithm.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crimson-med/Dofus-Discovery.git"
+  },
+  "keywords": [
+    "dofus",
+    "gaming",
+    "pathfinding"
+  ],
+  "author": "Mederic Burlet @lias The Falcon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crimson-med/Dofus-Discovery/issues"
+  },
+  "homepage": "https://github.com/crimson-med/Dofus-Discovery#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11"
+  }
+}
