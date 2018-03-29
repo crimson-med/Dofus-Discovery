@@ -7,13 +7,15 @@ block content
     thead
       tr
         th Key
-        th Value
+        th X
+        th Y
         th Map
     tbody
       each val, index in json
         tr
           td #{index}
-          td #{val}
+          td #{val.x}
+          td #{val.y}
           td
             - var img = myimg
             img.className#IdName(src=val.background alt="Image Title")
