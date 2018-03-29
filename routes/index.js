@@ -80,8 +80,6 @@ function visitNode(){
       if(error.response.status == 404){
         //visitedNodes.push(previousNode);
         currentNode = tovisitNodes[0];
-
-        // GO TO NEXT TOVISITNODE
         console.log("-- HIT A WALL at -- " + previousNode.x + "," + previousNode.y + "  --  mapID: " +currentNode.id);
         console.log("-- STARTING at -- " + tovisitNodes[0].x + "," + tovisitNodes[0].y + "  --  mapID: " +currentNode.id);
         tovisitNodes.shift();
@@ -92,6 +90,7 @@ function visitNode(){
     });
   });
 }
+
 function checkAndAddArr(toAdd) {
   for (var i = 0; i < toAdd.length; i++) {
     var id = tovisitNodes.length + 1;
@@ -101,6 +100,7 @@ function checkAndAddArr(toAdd) {
     if (!found) { tovisitNodes.push(toAdd[i]); }
   }
 }
+
 function remove_duplicates(a, b) {
     for (var i = 0, len = a.length; i < len; i++) {
         for (var j = 0, len2 = b.length; j < len2; j++) {
@@ -111,31 +111,5 @@ function remove_duplicates(a, b) {
         }
     }
 }
-
-/*
-function myAsyncFunctionDown(id) {
-  return new Promise((resolve, reject) => {
-    axios.get('https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/maps/'+id+'.json')
-    .then(response => {
-      //console.log(response.data.id);
-      Corigin[1]++;
-      const myimage = "https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/backgrounds/"+response.data.id+".jpg";
-      var mapdata = {id: id, x:0, y:Corigin[1], topNeighbourId:response.data.topNeighbourId, bottomNeighbourId: response.data.bottomNeighbourId, leftNeighbourId:response.data.leftNeighbourId, rightNeighbourId:response.data.rightNeighbourId, background: myimage};
-      //console.log(mapdata);
-      if(mapdata != null){
-        NSLine.push(mapdata);
-      }
-      //console.log('next map: '+ response.data.topNeighbourId);
-      nexter = response.data.bottomNeighbourId;
-      resolve();
-    })
-    .catch(error => {
-      console.log(error.url);
-      resolve();
-      //reject(error);
-    });
-  });
-}
-*/
 
 module.exports = router;
