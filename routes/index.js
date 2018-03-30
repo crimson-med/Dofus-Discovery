@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 var fs = require('fs');
-var origin = 88212247;
+
 var map = {id:88212247, x:0, y:0, topNeighbourId:00000001, bottomNeighbourId:00000002,leftNeighbourId:00000003, rightNeighbourId:00000004, background: ''};
 var NSLine = [];
 var Corigin = [0,0];
@@ -12,12 +12,12 @@ var visitedNodes= [];
 var tovisitNodes = [];
 var currentNode = {};
 var previousNode = {};
+var origin = 88212247;
 var nexter = 0;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   axios.get('https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/maps/'+origin+'.json')
   .then(response => {
-    nexter = response.data.leftNeighbourId;
     const myimage = "https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/backgrounds/"+response.data.id+".jpg";
     var mapdata = {id: origin, x:0, y:0, topNeighbourId:response.data.topNeighbourId, bottomNeighbourId: response.data.bottomNeighbourId, leftNeighbourId:response.data.leftNeighbourId, rightNeighbourId:response.data.rightNeighbourId, background:myimage};
     visitedNodes.push(mapdata);
@@ -29,7 +29,6 @@ router.get('/', function(req, res, next) {
     ];
     console.log("To visit: "+toVisit.length);
     checkAndAddArr(toVisit);
-    // ADD IF NO DUPLICATES
     console.log("visitedNodes: "+visitedNodes.length+"  ---  tovisitNodes: "+tovisitNodes.length);
     currentNode = {id: response.data.leftNeighbourId, x:mapdata.x-1, y:mapdata.y};
     previousNode = mapdata;
