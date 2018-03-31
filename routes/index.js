@@ -17,7 +17,9 @@ var origin = 88212247;
 var nexter = 0;
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log ("in index with: " + maps + "maps") ;
+  var config = req.app.get('maps');
+  console.log ("in index with: " + config + " maps") ;
+  res.render('index', { title: 'Dofus Discovery', json: config});
 });
 
 async function pathMapping(res) {

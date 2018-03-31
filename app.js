@@ -13,6 +13,12 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+mapHandler.getEverything()
+.then(data => {
+    app.set('maps', data);
+  console.log("finished");
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,11 +44,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-mapHandler.getEverything()
-.then(data => {
-  console.log("finished");
-  exports.maps = data;
-});/*
+
+
+
+
+/*
 mapHandler.getAllMaps('88212247', 100)
   .then(data => {
     console.log(data.map(m => m.id));
