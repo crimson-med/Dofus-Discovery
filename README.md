@@ -6,7 +6,7 @@ A tool to generate an overview of the Dofus world map and create a pathfinder al
  - Collecting all Map IDs
  - Collecting Maps Positions
 
-![Example of progress](images/progress.gif)
+![Example of progress](images/progressHD.gif)
 
 # To Do
 

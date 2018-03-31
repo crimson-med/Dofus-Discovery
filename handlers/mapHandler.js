@@ -79,7 +79,6 @@ module.exports = {
           const totalMaps = Object.values(response.data).length;
           for (var i = 0; i < Object.values(response.data).length; i++) {
             var mapData = {mapID: Object.values(response.data)[i].id, posX: Object.values(response.data)[i].posX, posY: Object.values(response.data)[i].posY}
-
             process.stdout.clearLine();  // clear current text
             process.stdout.cursorTo(0);  // move cursor to beginning of line
             console.log(mapData);
