@@ -96,7 +96,7 @@ module.exports = {
             process.stdout.write(progress + "   map "+i+"/"+totalMaps);
             allMapsData.push(mapData);
           }
-          return allMaps
+          return allMapsData
       })
       .catch(error => {
       console.log(error);});
