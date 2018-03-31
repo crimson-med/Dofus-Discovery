@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 var fs = require('fs');
+var maps = require("./../app.js").maps;
 
 var map = {id:88212247, x:0, y:0, topNeighbourId:00000001, bottomNeighbourId:00000002,leftNeighbourId:00000003, rightNeighbourId:00000004, background: ''};
 var NSLine = [];
@@ -16,27 +17,7 @@ var origin = 88212247;
 var nexter = 0;
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  axios.get('https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/maps/'+origin+'.json')
-  .then(response => {
-    const myimage = "https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/backgrounds/"+response.data.id+".jpg";
-    var mapdata = {id: origin, x:0, y:0, topNeighbourId:response.data.topNeighbourId, bottomNeighbourId: response.data.bottomNeighbourId, leftNeighbourId:response.data.leftNeighbourId, rightNeighbourId:response.data.rightNeighbourId, background:myimage};
-    visitedNodes.push(mapdata);
-    console.log("visitedNodes: "+visitedNodes[0].id);
-    var toVisit = [
-      {id: response.data.topNeighbourId, x:mapdata.x, y:mapdata.y-1},
-      {id: response.data.bottomNeighbourId, x:mapdata.x, y:mapdata.y+1},
-      {id: response.data.rightNeighbourId, x:mapdata.x+1, y:mapdata.y},
-    ];
-    console.log("To visit: "+toVisit.length);
-    checkAndAddArr(toVisit);
-    console.log("visitedNodes: "+visitedNodes.length+"  ---  tovisitNodes: "+tovisitNodes.length);
-    currentNode = {id: response.data.leftNeighbourId, x:mapdata.x-1, y:mapdata.y};
-    previousNode = mapdata;
-    pathMapping(res);
-  })
-  .catch(error => {
-    console.log(error);
-  });
+  console.log ("in index with: " + maps + "maps") ;
 });
 
 async function pathMapping(res) {

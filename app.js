@@ -37,14 +37,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-mapHandler.getAllMapsId().then(mapIds => {
-  getAllMapsCoord(mapIds).then(mapDatas => {
-    console.log("mapdata length = " + mapDatas.length);
-  });
-  //console.log(data);
-  console.log("mapIds length" + data.length);
-});
-/*mapHandler.getAllMaps('88212247', 100)
+
+mapHandler.getEverything()
+.then(data => {
+  console.log("finished");
+  exports.maps = data;
+});/*
+mapHandler.getAllMaps('88212247', 100)
   .then(data => {
     console.log(data.map(m => m.id));
 });*/
