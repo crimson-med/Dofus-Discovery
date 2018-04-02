@@ -4,20 +4,35 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mapHandler = require('./handlers/mapHandler.js');
+var worldHandler = require('./handlers/worldHandler.js');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var fs = require('fs');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
-mapHandler.getEverything()
-.then(data => {
-    app.set('maps', data);
-  console.log("finished");
+worldHandler.getWorlds()
+.then(gameWorlds => {
+  //console.log(Object.values(gameWorlds).length);
+  mapHandler.getEverything()
+  .then(data => {
+    for (var i = 0; i < Object.values(gameWorlds).length; i++) {
+      if ((i+1) <= 12){
+        Object.values(gameWorlds)[i].maps = data.filter(map => map.worldMap == (i+1) && map.worldMap >= 0 );
+      }
+    }
+    app.set('maps', gameWorlds);
+    console.log("finished");
+    //fs.writeFile('maps.json', JSON.stringify(gameWorlds), function (err) {
+    //if (err) throw err;
+  //    console.log('It\'s saved! in same location.');
+    //});
+  });
 });
+
 
 app.use(logger('dev'));
 app.use(express.json());

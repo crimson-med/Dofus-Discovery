@@ -18,59 +18,27 @@ var nexter = 0;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var config = req.app.get('maps');
-  console.log ("in index with: " + config + " maps") ;
-  res.render('index', { title: 'Dofus Discovery', json: config});
+  //var toprocess = positionSort(config);
+  //console.log ("in index with: " + config + " maps") ;
+  //console.log(toprocess)
+  res.render('index', { title: 'Dofus Discovery', json: JSON.stringify(positionSort)});
 });
 
-async function pathMapping(res) {
-    while (tovisitNodes.length != 0) {
-      await visitNode();
-    }
-    console.log(visitedNodes.length);
-    fs.writeFile('maps.txt', JSON.stringify(visitedNodes), function (err) {
-    if (err) throw err;
-      console.log('It\'s saved! in same location.');
-    });
-    res.render('index', { title: 'Dofus Discovery', json: visitedNodes});
+function positionSort(worldMaps) {
+
+  for (var i = 0; i < Object.values(worldMaps).length; i++) {
+      Object.values(worldMaps)[i].maps.sort(sortNumber);
+    //Object.values(gameWorlds)[i].maps.filter(map => map.posX == (i+1) && map.worldMap >= 0 );
+    /*for (var j = 0; j < Object.values(gameWorlds)[i].maps.length; j++) {
+      console.log(Object.values(gameWorlds)[i].maps[j]);
+
+    }*/
+  }
+
 }
-function visitNode(){
-  return new Promise((resolve, reject) => {
-    console.log("Trying to get: " + currentNode.x + "," + currentNode.y + "  --  mapID: " + currentNode.id);
-    axios.get('https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/maps/'+currentNode.id+'.json')
-    .then(response => {
-      const myimage = "https://ankama.akamaized.net/games/dofus-tablette/assets/2.18.3/backgrounds/"+currentNode.id+".jpg";
-      var mapdata = {id: currentNode.id, x:currentNode.x, y:currentNode.y, topNeighbourId:response.data.topNeighbourId, bottomNeighbourId: response.data.bottomNeighbourId, leftNeighbourId:response.data.leftNeighbourId, rightNeighbourId:response.data.rightNeighbourId, background: myimage};
-      visitedNodes.push(mapdata);
-      var toVisit = [
-        {id: response.data.topNeighbourId, x:mapdata.x, y:mapdata.y-1},
-        {id: response.data.bottomNeighbourId, x:mapdata.x, y:mapdata.y+1},
-        {id: response.data.rightNeighbourId, x:mapdata.x+1, y:mapdata.y}
-      ];
-      checkAndAddArr(toVisit);
-      //console.log("visitedNodes: "+visitedNodes.length+"  ---  tovisitNodes: "+tovisitNodes.length);
-      //process.stdout.clearLine();  // clear current text
-      //process.stdout.cursorTo(0);  // move cursor to beginning of line
-      //i = visitedNodes.length;
-      //var dots = new Array(i + 1).join(".");
-      //process.stdout.write("visitedNodes: "+visitedNodes.length+"  ---  tovisitNodes: "+tovisitNodes.length);  // write text
-      currentNode = {id: response.data.leftNeighbourId, x:mapdata.x-1, y:mapdata.y};
-      previousNode = mapdata;
-      remove_duplicates(visitedNodes, tovisitNodes);
-      resolve();
-    })
-    .catch(error => {
-      if(error.response.status == 404){
-        //visitedNodes.push(previousNode);
-        currentNode = tovisitNodes[0];
-        console.log("-- HIT A WALL at -- " + previousNode.x + "," + previousNode.y + "  --  mapID: " +currentNode.id);
-        console.log("-- STARTING at -- " + tovisitNodes[0].x + "," + tovisitNodes[0].y + "  --  mapID: " +currentNode.id);
-        tovisitNodes.shift();
-        remove_duplicates(visitedNodes, tovisitNodes);
-        resolve();
-        //reject(error);
-      }
-    });
-  });
+
+function sortNumber(a,b) {
+  return a.posY - b.posY || a.posX - b.posX;
 }
 
 function checkAndAddArr(toAdd) {

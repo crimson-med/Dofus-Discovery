@@ -48,10 +48,10 @@ module.exports = {
           var allMapsData = [];
           const totalMaps = Object.values(response.data).length;
           for (var i = 0; i < Object.values(response.data).length; i++) {
-            var mapData = {mapID: Object.values(response.data)[i].id, posX: Object.values(response.data)[i].posX, posY: Object.values(response.data)[i].posY, background: `${ASSETS_ROOT_URL}/backgrounds/${Object.values(response.data)[i].id}.jpg`}
+            var mapData = {mapID: Object.values(response.data)[i].id, posX: Object.values(response.data)[i].posX, posY: Object.values(response.data)[i].posY, worldMap: Object.values(response.data)[i].worldMap, background: `${ASSETS_ROOT_URL}/backgrounds/${Object.values(response.data)[i].id}.jpg`}
             process.stdout.clearLine();  // clear current text
             process.stdout.cursorTo(0);  // move cursor to beginning of line
-            console.log(mapData);
+            //console.log(mapData);
             var percent = ((i+1)/totalMaps*50).toFixed(2) ;
             var progress = "";
             for (var j = 0; j < 50; j++) {

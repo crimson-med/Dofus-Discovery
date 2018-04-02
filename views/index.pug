@@ -11,11 +11,6 @@ block content
         th Y
         th Map
     tbody
-      each val, index in json
+      each index in json
         tr
-          td #{val.mapID}
-          td #{val.posX}
-          td #{val.posY}
-          td
-            - var img = myimg
-            img.className#IdName(src=val.background alt="Image Title")
+          td #{index}
