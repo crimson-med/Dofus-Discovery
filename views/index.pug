@@ -13,6 +13,13 @@ block content
     tbody
       each world in json
         if world.id == 1
+          - var row = world.maps[0].posY
+          tr
           each map in world.maps
-            tr
+            if row == map.posY
               td #{map.posX},#{map.posY}
+              - row = map.posY
+            else
+              - row = map.posY
+              tr
+                td #{map.posX},#{map.posY}
