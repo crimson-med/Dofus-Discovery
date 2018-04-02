@@ -18,10 +18,11 @@ var nexter = 0;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var config = req.app.get('maps');
+  //positionSort(config);
   //var toprocess = positionSort(config);
   //console.log ("in index with: " + config + " maps") ;
   //console.log(toprocess)
-  res.render('index', { title: 'Dofus Discovery', json: JSON.stringify(positionSort)});
+  res.render('index', { title: 'Dofus Discovery', json: positionSort(config)});
 });
 
 function positionSort(worldMaps) {
@@ -34,6 +35,7 @@ function positionSort(worldMaps) {
 
     }*/
   }
+  return worldMaps
 
 }
 
