@@ -11,6 +11,8 @@ block content
         th Y
         th Map
     tbody
-      each val in json
-        tr
-          td #{val}
+      each world in json
+        if world.id == 1
+          each map in world.maps
+            tr
+              td #{map.posX},#{map.posY}
