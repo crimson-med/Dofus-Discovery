@@ -27,7 +27,6 @@ router.get('/', function(req, res, next) {
 });
 
 function getHiLo(worldMaps){
-
   for (var i = 0; i < Object.values(worldMaps).length; i++) {
     var lowestX = Number.POSITIVE_INFINITY;
     var highestX = Number.NEGATIVE_INFINITY;
@@ -35,16 +34,16 @@ function getHiLo(worldMaps){
     var lowestY = Number.POSITIVE_INFINITY;
     var highestY = Number.NEGATIVE_INFINITY;
     var tmpY;
-    for (var j=Object.values(worldMaps)[j].maps.length-1; j>=0; j--) {
-        tmpX = Object.values(worldMaps)[j].maps.posX;
+    for (var j=Object.values(worldMaps)[i].maps.length-1; j>=0; j--) {
+        tmpX = Object.values(worldMaps)[i].maps[j].posX;
         if (tmpX < lowestX) lowestX = tmpX;
         if (tmpX > highestX) highestX = tmpX;
-        tmpY = Object.values(worldMaps)[j].maps.posY;
+        tmpY = Object.values(worldMaps)[i].maps[j].posY;
         if (tmpY < lowestY) lowestY = tmpY;
         if (tmpY > highestY) highestY = tmpY;
     }
     Object.values(worldMaps)[i].hilo = {hiX: highestX, hiY: highestY, loX: lowestX, loY: lowestY};
-    console.log(Object.values(worldMaps)[i].hilo)
+    console.log(Object.values(worldMaps)[i].hilo);
   }
   return worldMaps
 }
