@@ -4,12 +4,6 @@ block content
   h1= title
   p Welcome to #{title}
   table
-    thead
-      tr
-        th Key
-        th X
-        th Y
-        th Map
     tbody
       each world in json
         if world.id == 1
@@ -17,9 +11,13 @@ block content
           tr
           each map in world.maps
             if row == map.posY
-              td #{map.posX},#{map.posY}
+              td
+                img.className#IdName(src=map.background alt="Image Title")
+                p #{map.posX},#{map.posY}
               - row = map.posY
             else
               - row = map.posY
               tr
-                td #{map.posX},#{map.posY}
+                td
+                  img.className#IdName(src=map.background alt="Image Title")
+                  p #{map.posX},#{map.posY}
