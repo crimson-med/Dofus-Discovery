@@ -10,7 +10,7 @@ var usersRouter = require('./routes/users');
 var fs = require('fs');
 
 var app = express();
-
+//https://webapplog.com/jade/
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

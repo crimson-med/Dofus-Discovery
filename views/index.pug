@@ -3,6 +3,9 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  script.
+    var data = !{JSON.stringify(json)};
+  canvas(id="myCanvas", width="1000", height="500", style="border:1px solid #d3d3d3;")
   table
     tbody
       each world in json
@@ -21,3 +24,15 @@ block content
                 td
                   img.className#IdName(src=map.background alt="Image Title")
                   p #{map.posX},#{map.posY}
+  script.
+    var canvas = document.getElementById("myCanvas")
+    console.log(data[1].hilo)
+    var ctx = canvas.getContext("2d")
+    var img = new Image
+    img.onload = function(){
+      ctx.drawImage(img,0,0,50,34)
+    };
+    img.src = data[1].maps[0].background
+    // ctx.moveTo(0,0)
+    // ctx.lineTo(200,100)
+    // ctx.stroke()
