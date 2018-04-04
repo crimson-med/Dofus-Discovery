@@ -8,6 +8,8 @@ A tool to generate an overview of the Dofus world map and create a pathfinder al
 
 ![Example of progress](images/progressHD.gif)
 
+![Example of map](images/rendered.jpg)
+
 # To Do
 
  - Save maps to DB

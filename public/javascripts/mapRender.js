@@ -38,11 +38,11 @@ function mapRender(mapsToRender){
   var ratioY = (680/differenceY);
   console.log("ratioX: " + ratioX + " ratioY" + ratioY);
   var ctx = canvas.getContext("2d")
-  ctx.translate(canvas.width/2,canvas.height/2);
+  //ctx.translate(canvas.width/2,canvas.height/2);
   function draw(images){
     for(var i = 0; i < images.length; i++){
       console.log("Drawing an image at: " +images[i].x*ratioX + ","+images[i].y*ratioY)
-      ctx.drawImage(images[i].background,images[i].x*ratioX,(images[i].y*ratioY)*-1,50, 34);
+      ctx.drawImage(images[i].background,images[i].x*ratioX,(images[i].y*ratioY),ratioX, ratioY);
     }
   }
   promiseOfAllImages(mapsToRender.maps)
