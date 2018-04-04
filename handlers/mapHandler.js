@@ -24,13 +24,9 @@ module.exports = {
     return axios.post(`${DATA_ROOT_URL}`, {class:"MapCoordinates",ids:[]})
       .then(response => {
           var allMaps = [];
-          //console.log(Object.values(response.data).length);
           for (var i = 0; i < Object.values(response.data).length; i++) {
-            //console.log(Object.values(response.data)[i]);
             allMaps = allMaps.concat(Object.values(response.data)[i].mapIds);
-            //console.log(allMaps);
           }
-          //let uniq = allMaps => [...new Set(allMaps)];
           allMaps = uniq_fast(allMaps);
           return allMaps
       })

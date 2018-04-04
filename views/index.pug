@@ -15,43 +15,15 @@ block content
           each map in world.maps
             if row == map.posY
               td
-                img.className#IdName(src=map.background alt="Image Title")
+                // img.className#IdName(src=map.background alt="Image Title")
                 p #{map.posX},#{map.posY}
               - row = map.posY
             else
               - row = map.posY
               tr
                 td
-                  img.className#IdName(src=map.background alt="Image Title")
+                  // img.className#IdName(src=map.background alt="Image Title")
                   p #{map.posX},#{map.posY}
+  script(src="javascripts/mapRender.js")
   script.
-    var promiseOfAllImages = function (tiles) {
-      // Wait until ALL images are loaded
-      return Promise.all(
-        tiles.map(function (t) {
-          // Load each tile, and "resolve" when done
-          return new Promise(function (resolve) {
-            var img = new Image();
-            img.src = t.background;
-            img.onload = function () {
-              // Image has loaded... resolve the promise!
-              resolve(img);
-            };
-          });
-        })
-      );
-    };
-    var canvas = document.getElementById("myCanvas")
-    console.log(data[1].hilo)
-    var differenceX = Math.abs(data[1].hilo.loX - data[1].hilo.hiX);
-    var differenceY = Math.abs(data[1].hilo.loY - data[1].hilo.hiY);
-    var ratioX = (differenceX/1000);
-    var ratioY = (differenceY/680);
-    console.log("differenceX: " + differenceX + " differenceY: " + differenceY);
-    console.log("ratioX: " + ratioX + " ratioY" + ratioY);
-    var ctx = canvas.getContext("2d")
-    promiseOfAllImages(data[1].maps)
-    .then(function (allImages) {
-      console.log("All images are loaded!", allImages); // [Img, Img, Img]
-      //draw(tiles, allImages, ground);
-    });
+    mapRender(data[1]);
