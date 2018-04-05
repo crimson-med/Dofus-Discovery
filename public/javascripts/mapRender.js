@@ -31,14 +31,20 @@ var promiseOfAllImages = function (tiles) {
 function mapRender(mapsToRender){
   console.log("hello");
   var canvas = document.getElementById("myCanvas")
+  var ctx = canvas.getContext("2d")
   console.log(mapsToRender.hilo)
   var differenceX = Math.abs(mapsToRender.hilo.loX - mapsToRender.hilo.hiX);
   var differenceY = Math.abs(mapsToRender.hilo.loY - mapsToRender.hilo.hiY);
+  if (mapsToRender.hilo.loX < 0 && mapsToRender.hilo.loY < 0){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.translate(canvas.width/2,canvas.height/2);
+  }
   var ratioX = (1000/differenceX);
   var ratioY = (680/differenceY);
   console.log("ratioX: " + ratioX + " ratioY" + ratioY);
-  var ctx = canvas.getContext("2d")
-  //ctx.translate(canvas.width/2,canvas.height/2);
+  ctx.clearRect(canvas.width/2*-1, canvas.height/2, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   function draw(images){
     for(var i = 0; i < images.length; i++){
       console.log("Drawing an image at: " +images[i].x*ratioX + ","+images[i].y*ratioY)

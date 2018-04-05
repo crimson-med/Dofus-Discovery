@@ -3,6 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form
+    select(id="myList")
+      option(value="2") Zone de départ
+      option(value="1") Continent Amaknien
   script.
     var data = !{JSON.stringify(json)};
   canvas(id="myCanvas", width="1000", height="680", style="border:1px solid #d3d3d3;")
@@ -26,4 +30,9 @@ block content
                   p #{map.posX},#{map.posY}
   script(src="javascripts/mapRender.js")
   script.
+    document.getElementById("myList").onchange = function() {
+      var destination = parseInt(this.value);
+      mapRender(data[destination]);
+      return false
+    };
     mapRender(data[2]);
