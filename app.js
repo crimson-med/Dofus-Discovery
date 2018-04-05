@@ -8,7 +8,7 @@ var worldHandler = require('./handlers/worldHandler.js');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var fs = require('fs');
-
+request = require('request');
 var app = express();
 //https://webapplog.com/jade/
 // view engine setup
@@ -23,6 +23,12 @@ worldHandler.getWorlds()
       if ((i+1) <= 12){
         Object.values(gameWorlds)[i].maps = data.filter(map => map.worldMap == (i+1) && map.worldMap >= 0 );
       }
+    }
+    for (var i = 0; i < Object.values(gameWorlds).length; i++) {
+      download('https://www.google.com/images/srpr/logo3w.png', 'google.png', function(){
+        console.log('done');
+      });
+      Object.values(gameWorlds)[i]
     }
     app.set('maps', gameWorlds);
     console.log("finished");
@@ -70,3 +76,12 @@ mapHandler.getAllMaps('88212247', 100)
 });*/
 
 module.exports = app;
+
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
