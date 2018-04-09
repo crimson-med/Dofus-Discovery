@@ -5,6 +5,9 @@ A tool to generate an overview of the Dofus world map and create a pathfinder al
 
  - Collecting all Map IDs
  - Collecting Maps Positions
+ - Downloading full size background
+ - Resizing a smaller background
+ - Render Starter Area and Amakna Area
 
 ![Example of progress](images/progressHD.gif)
 
@@ -12,7 +15,7 @@ A tool to generate an overview of the Dofus world map and create a pathfinder al
 
 # To Do
 
- - Save maps to DB
+ - Render from downloaded files (should make render much faster!)
  - Implement algorithm to check if can cross a map
  - Implement A* algorithm
 
