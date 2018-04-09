@@ -10,24 +10,7 @@ block content
   script.
     var data = !{JSON.stringify(json)};
   canvas(id="myCanvas", width="1000", height="680", style="border:1px solid #d3d3d3;")
-  table
-    tbody
-      each world in json
-        if world.id == 1
-          - var row = world.maps[0].posY
-          tr
-          each map in world.maps
-            if row == map.posY
-              td
-                // img.className#IdName(src=map.background alt="Image Title")
-                p #{map.posX},#{map.posY}
-              - row = map.posY
-            else
-              - row = map.posY
-              tr
-                td
-                  // img.className#IdName(src=map.background alt="Image Title")
-                  p #{map.posX},#{map.posY}
+
   script(src="javascripts/mapRender.js")
   script.
     document.getElementById("myList").onchange = function() {

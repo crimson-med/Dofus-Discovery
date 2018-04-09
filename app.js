@@ -31,7 +31,9 @@ worldHandler.getWorlds()
       });
       Object.values(gameWorlds)[i]
     }*/
-    mapDownloader.downloadMaps(gameWorlds[2]);
+    console.log("ANKAMA: "+Object.values(gameWorlds).length);
+    mapDownloader.downloadMaps(Object.values(gameWorlds)[1]);
+    //mapDownloader.downloadMaps(Object.values(gameWorlds)[1]);
     app.set('maps', gameWorlds);
     console.log("finished");
     //fs.writeFile('maps.json', JSON.stringify(gameWorlds), function (err) {

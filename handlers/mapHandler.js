@@ -35,11 +35,7 @@ module.exports = {
   },
   getAllMapsCoord: async function (mapIds) {
     console.log("Getting info for: "+mapIds.length);
-    let halfWayThough = Math.floor(mapIds.length / 2)
-
-    let arrayFirstHalf = mapIds.slice(0, halfWayThough);
-    let arraySecondHalf = mapIds.slice(halfWayThough, mapIds.length);
-    return axios.post(`${DATA_ROOT_URL}`, {class:"MapPositions",ids:arrayFirstHalf})
+    return axios.post(`${DATA_ROOT_URL}`, {class:"MapPositions",ids:mapIds})
       .then(response => {
           var allMapsData = [];
           const totalMaps = Object.values(response.data).length;
@@ -70,9 +66,15 @@ module.exports = {
     try {
       const plop = await this.getAllMapsId();
       console.log("\n Plop (mapIds) length" + plop.length);
-      const blob = await this.getAllMapsCoord(plop);
+      let halfWayThough = Math.floor(plop.length / 2)
+      let arrayFirstHalf = plop.slice(0, halfWayThough);
+      let arraySecondHalf = plop.slice(halfWayThough, plop.length);
+      let blob = await this.getAllMapsCoord(arrayFirstHalf);
+      let blober = await this.getAllMapsCoord(arraySecondHalf);
       console.log("\n Blob (mapDatas) = " + blob.length);
-      return blob
+      let final = blob.concat(blober);
+      console.log("TOTAL: "+ final.length)
+      return final
     } catch (e) {
       console.log(e);
     }

@@ -56,7 +56,7 @@ var downloadAllImages = async function(tiles) {
     tiles.map(function(t) {
       return new Promise(function(resolve) {
         downloadImage(t).then(response => {
-          console.log("background " + currentImg + "/" + totalImg + " --- " + response);
+          console.log("background " + currentImg + "/" + totalImg + " --- " + response.data);
           currentImg++;
           resolve({
             image: currentImg - 1
