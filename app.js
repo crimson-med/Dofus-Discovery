@@ -5,10 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mapHandler = require('./handlers/mapHandler.js');
 var worldHandler = require('./handlers/worldHandler.js');
+var mapDownloader = require('./handlers/mapDownloader.js');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var fs = require('fs');
-request = require('request');
+var axios = require('axios');
 var app = express();
 //https://webapplog.com/jade/
 // view engine setup
@@ -24,12 +25,13 @@ worldHandler.getWorlds()
         Object.values(gameWorlds)[i].maps = data.filter(map => map.worldMap == (i+1) && map.worldMap >= 0 );
       }
     }
-    for (var i = 0; i < Object.values(gameWorlds).length; i++) {
+    /*for (var i = 0; i < Object.values(gameWorlds).length; i++) {
       download('https://www.google.com/images/srpr/logo3w.png', 'google.png', function(){
         console.log('done');
       });
       Object.values(gameWorlds)[i]
-    }
+    }*/
+    mapDownloader.downloadMaps(gameWorlds[2]);
     app.set('maps', gameWorlds);
     console.log("finished");
     //fs.writeFile('maps.json', JSON.stringify(gameWorlds), function (err) {
