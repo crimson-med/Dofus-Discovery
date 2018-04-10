@@ -31,8 +31,16 @@ worldHandler.getWorlds()
       });
       Object.values(gameWorlds)[i]
     }*/
-    console.log("ANKAMA: "+Object.values(gameWorlds).length);
-    mapDownloader.downloadMaps(Object.values(gameWorlds)[1]);
+    console.log("1"+gameWorlds[1].maps.length);
+
+    let test = JSON.stringify(gameWorlds[1]);
+    let final = JSON.parse(test);
+    console.log("ANKAMA: "+final.maps.length);
+    //fs.writeFile('world1.json', JSON.stringify(gameWorlds[1]), function (err) {
+    //if (err) throw err;
+    //  console.log('It\'s saved! in same location.');
+    //});
+    mapDownloader.downloadMaps(gameWorlds[1].maps);
     //mapDownloader.downloadMaps(Object.values(gameWorlds)[1]);
     app.set('maps', gameWorlds);
     console.log("finished");
