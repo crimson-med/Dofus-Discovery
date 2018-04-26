@@ -1,6 +1,6 @@
 const axios = require('axios');
-const ASSETS_ROOT_URL = 'https://ankama.akamaized.net/games/dofus-tablette/assets/2.19.0';
-const DATA_ROOT_URL = "https://proxyconnection.touch.dofus.com/data/map?lang=fr&v=2.19.0b"
+const ASSETS_ROOT_URL = 'https://ankama.akamaized.net/games/dofus-tablette/assets/2.21.0';
+const DATA_ROOT_URL = "https://proxyconnection.touch.dofus.com/data/map?lang=fr&v=2.21.0b"
 module.exports = {
 
   getMapData: async function (mapId) {

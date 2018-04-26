@@ -43,7 +43,7 @@ function mapRender(mapsToRender){
   console.log(mapsToRender.hilo)
   var differenceX = Math.abs(mapsToRender.hilo.loX - mapsToRender.hilo.hiX);
   var differenceY = Math.abs(mapsToRender.hilo.loY - mapsToRender.hilo.hiY);
-  if (mapsToRender.hilo.loX < 0 && mapsToRender.hilo.loY < 0){
+  if (mapsToRender.hilo.loX < -20 && mapsToRender.hilo.loY < -20){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.translate(canvas.width/2,canvas.height/2);
   }
